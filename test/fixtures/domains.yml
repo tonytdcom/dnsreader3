@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  domain: MyString
+  spf: MyString
+  dmarc: MyString
+  txt: MyString
+  sip: MyString
+
+two:
+  domain: MyString
+  spf: MyString
+  dmarc: MyString
+  txt: MyString
+  sip: MyString

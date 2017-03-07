@@ -1,0 +1,30 @@
+<h1>Domain Update scan</h1>
+<p>RUNNING</p>
+
+    <% @domains.each do |domain| %>
+    <p><%=domain.domain %></p>
+        <%begin%>
+            <%result = Net::DNS::Resolver.start(domain.domain , Net::DNS::TXT) %>
+            <%rescue%>
+            <p>something broke</p>
+            <%break%>
+            <%end%>
+            <% values = result.each_mx.map { |r| r.txt } %>
+                <% values.each do |value| %>
+                     <% if value.include?("v=spf1")  %>
+                       <% domain.update_attribute(:spf, value) %> 
+                     <% end %>
+                     <% if value.include?("v=DMARC1") %>
+                         <% domain.update_attribute(:dmarc, value) %>
+                     <% end %>     
+                       <% domain.save %>
+                    <% end %> 
+                 
+            
+    <% end %>
+
+<P>COMPLETE</P>
+     
+<%= link_to 'Show Domain', domains_path %>
+<%= link_to 'Run Scan', domains_scans_path %> 
+

@@ -1,0 +1,25 @@
+<h1>Domain sip scan</h1>
+<p>RUNNING</p>
+
+    <% @domains.each do |domain| %>
+    <% sipdomain = "sip." + domain.domain %>
+    <p><%= sipdomain %>
+        <% result = Net::DNS::Resolver.start(sipdomain , Net::DNS::A) %>
+        <% values = result.each_mx %>
+        <% values.each do |value| %>
+        <% strval = "#{value}" %>
+        <% sipip = strval.partition('A').last %>
+        <%= sipip %>
+        <% domain.update_attribute(:sip, sipip) %>
+        <% end %>
+    <% end %></p>     
+                      
+         
+                 
+            
+ 
+
+<P>COMPLETE</P>
+     
+<%= link_to 'Show Domain', domains_path %>
+<%= link_to 'Run Scan', domains_scans_path %> 

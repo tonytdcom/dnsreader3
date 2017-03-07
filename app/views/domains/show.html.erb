@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Domain:</strong>
+  <%= @domain.domain %>
+</p>
+
+<p>
+  <strong>Spf:</strong>
+  <%= @domain.spf %>
+</p>
+
+<p>
+  <strong>Dmarc:</strong>
+  <%= @domain.dmarc %>
+</p>
+
+<p>
+  <strong>Txt:</strong>
+  <%= @domain.txt %>
+</p>
+
+<p>
+  <strong>Sip:</strong>
+  <%= @domain.sip %>
+</p>
+
+<%= link_to 'Edit', edit_domain_path(@domain) %> |
+<%= link_to 'Back', domains_path %>

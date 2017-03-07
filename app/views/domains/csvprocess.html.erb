@@ -1,0 +1,10 @@
+
+<% require 'csv' %>
+<% CSV.foreach("./tmp/domains.csv") do |row|%>
+
+<%row = row[0]%>
+<p><%= row%></p>
+<%  object = Domain.new(:domain => row) %>
+<%  object.save %>
+
+<%end%>

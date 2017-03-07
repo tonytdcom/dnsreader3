@@ -1,0 +1,46 @@
+<%= form_for(@domain) do |f| %>
+  <% if @domain.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@domain.errors.count, "error") %> prohibited this domain from being saved:</h2>
+
+      <ul>
+      <% @domain.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+            <div class="well well-lg">
+                <div class="article-title">
+                    <div class="field">
+                      <%= f.label :domain %><br>
+                      <%= f.text_field :domain, :size => 50 %>
+                    </div>
+                    <div class="field">
+                      <%= f.label :spf %><br>
+                      <%= f.text_field :spf, :size => 50 %>
+                    </div>
+                    <div class="field">
+                      <%= f.label :dmarc%><br>
+                      <%= f.text_field :dmarc, :size => 50 %>
+                    </div>
+                    <div class="field">
+                      <%= f.label :txt%><br>
+                      <%= f.text_field :txt, :size => 50  %>
+                    </div>
+                    <div class="field">
+                      <%= f.label :sip%><br>
+                      <%= f.text_field :sip, :size => 50  %>
+                    </div>
+                    <div class="actions">
+                      <%= f.submit class: 'btn btn-primary' %>
+                      <%= link_to "Cancel", domains_path, class: "btn btn btn-danger" %>
+
+                    </div>
+                  <% end %>
+            </div>
+          </div>
+        </div>  
+        </div>
