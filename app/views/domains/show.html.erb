@@ -1,29 +1,41 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Domain:</strong>
-  <%= @domain.domain %>
-</p>
 
-<p>
-  <strong>Spf:</strong>
-  <%= @domain.spf %>
-</p>
-
-<p>
-  <strong>Dmarc:</strong>
-  <%= @domain.dmarc %>
-</p>
-
-<p>
-  <strong>Txt:</strong>
-  <%= @domain.txt %>
-</p>
-
-<p>
-  <strong>Sip:</strong>
-  <%= @domain.sip %>
-</p>
-
-<%= link_to 'Edit', edit_domain_path(@domain) %> |
-<%= link_to 'Back', domains_path %>
+<div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+            <div class="well well-lg">
+                <div class="article-title">
+                 <%= @domain.domain %>
+                </div>
+                <div class="article-body">
+                  <p><strong>Sender Policy Framework Record</strong></p>
+                  <% if @domain.spf !="" %>
+                 <%= @domain.spf %>
+                 <% else %>
+                 <p>None</p>
+                 <%end%>
+                 </div>
+                 <div class="article-body">
+                  <p><strong>DMARC Record</strong></p>
+                     <% if @domain.dmarc !="" %>
+                     <%= @domain.dmarc %>
+                     <% else %>
+                     <p>None</p>
+                     <%end%>
+                 </div>
+                 <div class="article-body">
+                  <p><strong>Sip Record</strong></p>
+                      <% if @domain.sip !="" %>
+                      <%= @domain.sip %>
+                      <% else %>
+                     <p>None</p>
+                     <%end%>
+                 </div>
+                
+                <div class="article_actions">
+                    <%= link_to "Edit this Record", edit_domain_path(@domain), class: "btn btn-xs btn-primary" %>
+                    <%= link_to "Delete Record", domain_path(@domain), method: :delete, data: {confirm: "Are You Sure" }, class: "btn btn-xs btn-danger" %>
+                </div>
+            </div>
+        </div> 
+    </div>

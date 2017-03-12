@@ -12,26 +12,26 @@
                 </div>
                 <div class="article-body">
                   <p><strong>Sender Policy Framework Record</strong></p>
-                  <% if domain.spf !="" %>
-                 <%= domain.spf %>
+                  <% if domain.spf.present? %>
+                 <p style="background-color:rgb(0,255,0)"><%= domain.spf %></p>
                  <% else %>
-                 <p>None</p>
+                 <p style="color:#ff0000" >None</p>
                  <%end%>
                  </div>
                  <div class="article-body">
                   <p><strong>DMARC Record</strong></p>
-                     <% if domain.dmarc !="" %>
-                     <%= domain.dmarc %>
+                     <% if domain.dmarc.present? %>
+                     <p style="background-color:rgb(0,255,0)"><%= domain.dmarc %></p>
                      <% else %>
-                     <p>None</p>
+                     <p style="color:#ff0000">None</p>
                      <%end%>
                  </div>
                  <div class="article-body">
                   <p><strong>Sip Record</strong></p>
-                      <% if domain.sip !="" %>
-                      <%= domain.sip %>
+                      <% if domain.sip.present? %>
+                      <p style="background-color:rgb(0,255,0)"><%= domain.sip %></p>
                       <% else %>
-                     <p>None</p>
+                     <p style="color:#ff0000">None</p>
                      <%end%>
                  </div>
                 

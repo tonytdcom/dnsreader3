@@ -1,8 +1,15 @@
 class DomainsController < ApplicationController
   before_action :set_domain, only: [:show, :edit, :update, :destroy,]
-
-  # GET /domains
-  # GET /domains.json
+  helper_method :sort_column, :sort_direction
+  def index
+        @domains = Domain.order("domain ASC")
+          if params[:search]
+           @domains = Domain.search(params[:search]).order("domain ASC")
+          else
+          @domains = Domain.all.order("domain ASC")
+          end
+  end
+  
   def scans
      @domains = Domain.all
      
@@ -15,17 +22,22 @@ class DomainsController < ApplicationController
   def sipscan
      @domains = Domain.all
   end
+
   def summary
-    @domains = Domain.all.order('domain ASC')
+          @domains = Domain.all.order("#{sort_column} #{sort_direction}")
+          if params[:search]
+          @domains = Domain.all.search(params[:search]).order("#{sort_column} #{sort_direction}")
+          else
+          @domains = Domain.all.order("#{sort_column} #{sort_direction}")
+          end
   end
   
-  def index
-    @domains = Domain.all.order('domain ASC')
-  end
+  
 
   # GET /domains/1
   # GET /domains/1.json
   def show
+    @domain = Domain.find(params[:id])
   end
 
   # GET /domains/new
@@ -75,6 +87,8 @@ class DomainsController < ApplicationController
       format.html { redirect_to domains_url, notice: 'Domain was successfully destroyed.' }
       format.json { head :no_content }
     end
+    
+     
   end
 
 
@@ -92,4 +106,17 @@ class DomainsController < ApplicationController
     def domainupdate_params
       params.permit(:domain, :spf, :dmarc, :txt, :sip)
     end
+  
+  
+    def sortable_columns
+    ["Domain", "Spf", "DMARC", "SIP"]
+    end
+
+  def sort_column
+    sortable_columns.include?(params[:column]) ? params[:column] : "Domain"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
 end
