@@ -1,0 +1,33 @@
+<h1>Domain sip scan</h1>
+<p>RUNNING</p>
+
+    <% @domains.each do |domain| %>
+    <% mxdomain = domain.domain %>
+        <% next if mxdomain =="askthe.police.uk" %>
+            <% next if mxdomain =="southwales.police.uk" %>
+            <% next if mxdomain =="south-wales.police.uk" %>
+            
+            <p><%= mxdomain %>
+                <%begin%>
+                <% result = Resolv::DNS.open.getresources(mxdomain, Resolv::DNS::Resource::IN::MX) %>
+                <% if result !="" %>
+                <% strval = result.map { |r| [IPSocket::getaddress(r.exchange.to_s) ]} %>
+                <%else%>
+                <% strval ="" %>
+                <% end%>
+                <%rescue%>
+                <p>something broke</p>
+                <%break%>
+                <%end%>
+            <% strval = strval.join (",") %>
+            <%= strval%>
+
+        <% domain.update_attribute(:mx, strval) %>
+
+           
+    <% end %></p>     
+
+<P>COMPLETE</P>
+     
+<%= link_to 'Show Domain', domains_path %>
+<%= link_to 'Run Scan', domains_scans_path %> 

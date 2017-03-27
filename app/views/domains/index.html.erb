@@ -27,6 +27,15 @@
                      <%end%>
                  </div>
                  <div class="article-body">
+                  <p><strong>MX Record</strong></p>
+                     <% if domain.mx.present? %>
+                     <p style="background-color:rgb(0,255,0)"><%= domain.mx %></p>
+                     <% else %>
+                     <p style="color:#ff0000">None</p>
+                     <%end%>
+                 </div>
+
+                 <div class="article-body">
                   <p><strong>Sip Record</strong></p>
                       <% if domain.sip.present? %>
                       <p style="background-color:rgb(0,255,0)"><%= domain.sip %></p>

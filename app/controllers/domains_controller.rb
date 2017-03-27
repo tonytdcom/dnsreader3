@@ -19,6 +19,9 @@ class DomainsController < ApplicationController
     @domains = Domain.all
   end
   
+  def mxscan
+     @domains = Domain.all
+  end
   def sipscan
      @domains = Domain.all
   end
@@ -100,16 +103,16 @@ class DomainsController < ApplicationController
   
     # Never trust parameters from the scary internet, only allow the white list through.
     def domain_params
-      params.require(:domain).permit(:domain, :spf, :dmarc, :txt, :sip)
+      params.require(:domain).permit(:domain, :spf, :dmarc, :mx, :txt, :sip)
     end
     
     def domainupdate_params
-      params.permit(:domain, :spf, :dmarc, :txt, :sip)
+      params.permit(:domain, :spf, :dmarc, :txt, :mx, :sip)
     end
   
   
     def sortable_columns
-    ["Domain", "Spf", "DMARC", "SIP"]
+    ["Domain", "Spf", "DMARC", "MX", "SIP"]
     end
 
   def sort_column
@@ -119,4 +122,6 @@ class DomainsController < ApplicationController
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
+  
+
 end

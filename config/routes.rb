@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'domains/scans'
   get 'domains/sipscan'
+  get 'domains/mxscan'
   get 'domains/csvprocess'
   get 'domains/summary'
   resources :domains

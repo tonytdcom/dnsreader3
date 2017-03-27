@@ -12,17 +12,18 @@ $(document).ready(function(){
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th class="col-xs-3"><%= sort_link "Domain" %></th>
-                  <th class="col-xs-3"><%= sort_link "Spf" %></th>
-                  <th class="col-xs-3"><%= sort_link "DMARC" %></th>
-                  <th class="col-xs-3"><%= sort_link "SIP" %></th>
+                  <th class="col-xs-4"><%= sort_link "Domain" %></th>
+                  <th class="col-xs-2"><%= sort_link "Spf" %></th>
+                  <th class="col-xs-2"><%= sort_link "DMARC" %></th>
+                  <th class="col-xs-2"><%= sort_link "MX" %></th>
+                  <th class="col-xs-2"><%= sort_link "SIP" %></th>
                 </tr>
               </thead
              <% @domains.each do |domain| %>
 
               <tbody>
                 <tr>
-                 <td><%= link_to domain.domain, domain_path(domain) %></td>
+                 <td><%= link_to domain.domain, edit_domain_path(domain),:target => "_blank" %></td>
                   
                      <%if domain.spf.present? %>
                       <td><a href="#" data-toggle="tooltip" title="<%= domain.spf %>">SPF Present</a> </td>
@@ -31,6 +32,11 @@ $(document).ready(function(){
                       <% end %>
                 <%if domain.dmarc.present? %>
                       <td><a href="#" data-toggle="tooltip" title="<%= domain.dmarc %>">DMARC Present</a> </td>
+                      <% else%>
+                      <td> </td>
+                      <% end %> 
+                <%if domain.mx.present? %>
+                      <td><a href="#" data-toggle="tooltip" title="<%= domain.mx %>">MX Present</a> </td>
                       <% else%>
                       <td> </td>
                       <% end %> 
@@ -43,6 +49,15 @@ $(document).ready(function(){
                
               </tbody>
                <%end%>
+               <tr>
+                   <td>Total Domains = <%= Domain.count%></td>
+                   <td>Total SPF records = <%= Domain.count(:SPF) %></td>
+                   <td>Total DMARC records = <%= Domain.count(:DMARC) %></td>
+                   <td>Total MX records = <%= Domain.count(:MX) %></td>
+                   <td>Total SIP records = <%= Domain.count(:SIP) %></td>
+
+
+               </tr>
             </table>
 
 </div>

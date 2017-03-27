@@ -24,6 +24,22 @@
                      <%end%>
                  </div>
                  <div class="article-body">
+                  <p><strong>MX Record</strong></p>
+                     <% if @domain.mx !="" %>
+                     <%= @domain.mx %>
+                     <% else %>
+                     <p>None</p>
+                     <%end%>
+                 </div>
+                 <div class="article-body">
+                  <p><strong>txt Record</strong></p>
+                     <% if @domain.txt !="" %>
+                     <%= @domain.txt %>
+                     <% else %>
+                     <p>None</p>
+                     <%end%>
+                 </div>
+                 <div class="article-body">
                   <p><strong>Sip Record</strong></p>
                       <% if @domain.sip !="" %>
                       <%= @domain.sip %>
