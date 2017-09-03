@@ -44,21 +44,23 @@ $(document).ready(function(){
                       <td><a href="#" data-toggle="tooltip" title="<%= domain.sip %>">Sip Present</a> </td>
                       <% else%>
                       <td> </td>
-                      <% end %>      
+                      <% end %>
+                         
                 </tr>
                
               </tbody>
                <%end%>
                <tr>
-                   <td>Total Domains = <%= Domain.count%></td>
-                   <td>Total SPF records = <%= Domain.count(:SPF) %></td>
-                   <td>Total DMARC records = <%= Domain.count(:DMARC) %></td>
-                   <td>Total MX records = <%= Domain.count(:MX) %></td>
-                   <td>Total SIP records = <%= Domain.count(:SIP) %></td>
+                   <td>Total Domains = <%= Domain.forces.count%></td>
+                   <td>Total SPF records = <%= Domain.forces.spf.length %></td>
+                   <td>Total DMARC records = <%=  Domain.forces.dmarc.length %></td>
+                   <td>Total MX records = <%=  Domain.forces.mx.length %></td>
+                   <td>Total SIP records = <%=  Domain.forces.sip.length %></td>
 
 
                </tr>
             </table>
+            <div class = center><%= will_paginate @domains %></div>
 
 </div>
 </div>

@@ -1,0 +1,35 @@
+<h1>Domain Update scan</h1>
+<p>RUNNING</p>
+
+     <% Resolv::DNS.open do |dns| %>
+        <% @domains.each do |domain| %>
+         <% host = domain.domain %>
+         <%   records = dns.getresources(host, Resolv::DNS::Resource::IN::TXT) %>
+            <% records.each do |record| %>
+            <% txt = record.strings.join %>
+            
+                <% if txt.include?('v=spf1')%>
+                  <% domain.update_attribute(:spf, txt) %>
+                  <% domain.save %>
+                <% end %>
+            <% end %>
+                 <% hostd = "_dmarc.#{host}" %>
+                 <%= hostd%>
+                 <% recordds = dns.getresources(hostd, Resolv::DNS::Resource::IN::TXT) %>
+                <% recordds.each do |recordd| %>
+                 <% txtd = recordd.strings.join %>
+                 <%= txtd %>
+                  <% if txtd.include?('v=DMARC1;')%>
+                  <% domain.update_attribute(:dmarc, txtd) %>
+                  <% domain.save %>
+                  <% end %>
+                <% end %>
+        <% end %>     
+     <% end %>
+ <p>Finished</p>             
+ <%= link_to 'Show Domain', domains_path %>
+<%= link_to 'Run Scan', domains_scans_path %>                    
+          
+          
+            
+          

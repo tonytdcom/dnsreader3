@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.5'
 # bunder for boorstrap
 gem 'bootstrap-sass', '~> 3.3.6'
-
+gem 'will_paginate', '~> 3.0' 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -28,6 +28,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'net-dns'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+
+# pdf output stuff
+gem 'wkhtmltopdf-binary'
+gem 'wicked_pdf'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

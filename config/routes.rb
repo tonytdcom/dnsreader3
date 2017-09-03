@@ -1,9 +1,19 @@
 Rails.application.routes.draw do
+  root'domains#summary'
   get 'domains/scans'
+  get 'domains/scanonedomain'
   get 'domains/sipscan'
   get 'domains/mxscan'
   get 'domains/csvprocess'
   get 'domains/summary'
+  get 'domains/test'
+   # these routes are for showing users a login form, logging them in, and logging them out.
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
+  # routes for user creation.
+  get '/signup' => 'users#new'
+  post '/users' => 'users#create'
   resources :domains
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

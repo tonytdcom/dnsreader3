@@ -39,9 +39,11 @@
             <li role="separator" class="divider"></li>
             <li><%= link_to "Edit Domains", domains_path %></li>
             <li role="separator" class="divider"></li>
-            <li><%= link_to "Run Scan", domains_scans_path %></li>
-             <li role="separator" class="divider"></li>
+            <li><%= link_to "Run Scan", domains_scanonedomain_path %></li>
+            <li role="separator" class="divider"></li>
             <li><%= link_to "Run Sip Scan", domains_sipscan_path %></li>
+            <li role="separator" class="divider"></li>
+            <li><%= link_to "Run MX Scan", domains_mxscan_path %></li>
           </ul>
         </li>
       </ul>

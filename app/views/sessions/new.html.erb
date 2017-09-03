@@ -1,0 +1,17 @@
+<!-- app/views/sessions/new.html.erb -->
+
+
+<div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+            <div class="well well-lg">
+                <div class="article-title">Login</div>
+                <%= form_tag '/login' do %>
+
+                  <div class="article-body">Email:<%= text_field_tag :email %></div>
+                  <div class="article-body">Password: <%= password_field_tag :password %></div>
+                  <div class="article-body"><%= submit_tag "Submit" %></div>
+
+                <% end %>
+               
+            </div>
+        </div>    

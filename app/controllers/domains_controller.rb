@@ -1,4 +1,5 @@
 class DomainsController < ApplicationController
+  before_filter :authorize
   before_action :set_domain, only: [:show, :edit, :update, :destroy,]
   helper_method :sort_column, :sort_direction
   def index
@@ -11,8 +12,7 @@ class DomainsController < ApplicationController
   end
   
   def scans
-     @domains = Domain.all
-     
+    
   end
   
   def csvprocess
@@ -26,13 +26,28 @@ class DomainsController < ApplicationController
      @domains = Domain.all
   end
 
+  def test 
+     @domains = Domain.all
+  end
   def summary
-          @domains = Domain.all.order("#{sort_column} #{sort_direction}")
+    
+          @domains = Domain.all.paginate(page: params[:page], per_page: 20).order("#{sort_column} #{sort_direction}")
+          @doms = Domain.all
           if params[:search]
-          @domains = Domain.all.search(params[:search]).order("#{sort_column} #{sort_direction}")
+          @domains = Domain.all.paginate(page: params[:page], per_page: 20).search(params[:search]).order("#{sort_column} #{sort_direction}")
           else
-          @domains = Domain.all.order("#{sort_column} #{sort_direction}")
+          @domains = Domain.all.paginate(page: params[:page], per_page: 20).order("#{sort_column} #{sort_direction}")
           end
+  end
+  
+  def scanonedomain
+     @domains = Domain.all
+          if params[:search]
+           @domains = Domain.search(params[:search]).order("domain ASC")
+          else
+          @domains = Domain.all.order("domain ASC")
+          end
+     
   end
   
   
@@ -42,7 +57,8 @@ class DomainsController < ApplicationController
   def show
     @domain = Domain.find(params[:id])
   end
-
+  
+  
   # GET /domains/new
   def new
     @domain = Domain.new
