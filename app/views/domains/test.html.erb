@@ -1,3 +1,139 @@
-<h1>Test page</h1>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip({
+        placement : 'top'
+    });
+});
+</script>
+<h1>Statistics</h1>
+ <table class="table table-striped">
+    <tr>
+        <td>
+         Number of Police Domains  (includes .police.uk and pnn.police.uk)
+   
+        </td>
+        <td>
+            <%= Domain.ids.length %>
+        </td>
+        <td><a class="btn btn-success btn-sm btn-block btn-block">
+          <span class="glyphicon glyphicon-record" style="color:green" data-toggle="tooltip" data-original-title="Unchanged"></span> Unchanged 
+        </a></td>
+        <td></td>
+    </tr>
+    
+    <tr>
+        <td>
+         Number of Police Domains with SPF records 
+   
+        </td>
+        <td>
+            <%= Domain.spf.length %>
+        </td>
+        <td><a class="btn btn-danger btn-sm btn-block">
+          <span class="glyphicon glyphicon-record" style="color:red" data-toggle="tooltip" data-original-title="Unchanged"></span> Unchanged 
+        </a></td>
+        <td>3 to update</td>
 
-<p>Number of SPF records =<%= Domain.forces.spf.length %></p>
+    </tr>
+     
+    <tr>
+        <td>
+          Number of Police Domains with SPF records with the old pnn gateway listed 
+  
+        </td>
+        <td>
+            <%= Domain.spf.where("spf like?", ["%a:mail%"]).length %>
+        </td>
+        <td><a class="btn btn-success btn-sm btn-block">
+          <span class="glyphicon glyphicon-minus" style="color:green" data-toggle="tooltip" data-original-title="Down 7"></span>    Down 7    
+        </a></td>
+        <td>55 to update</td>
+
+    </tr>
+     
+    <tr>
+        <td>
+          Number of Police Domains with DMARC records 
+  
+        </td>
+        <td>
+            <%= Domain.dmarc.length %>
+        </td>
+        <td><a class="btn btn-success btn-sm btn-block">
+          <span class="glyphicon glyphicon-plus" style="color:green" data-toggle="tooltip" data-original-title="Up 9"></span>    Up 9    
+        </a></td>
+        <td>420 to update</td>
+
+    </tr>
+     <tr> </tr>
+    <tr>
+        <td>
+            Number of Police Domains with DMARC record set to reject</td>
+        <td> <%=Domain.dmarc.where("dmarc like?",["%reject%"]).length %>
+        </td>
+        <td><a class="btn btn-success btn-sm btn-block" data-toggle="tooltip" data-original-title="Up 1">
+          <span class="glyphicon glyphicon-plus" style="color:green" ></span>    Up 1    
+        </a></td>
+        <td>469 to update</td>
+
+    </tr>
+    <tr>
+        <td>
+            Number of Force Domains with SPF records (Just pnn.police.uk domains)
+
+        </td>
+        <td>
+            <%= Domain.forces.spf.length %>
+        </td>
+        <td><a class="btn btn-warning btn-sm btn-block">
+          <span class="glyphicon glyphicon-record" style="color:green" data-toggle="tooltip" data-original-title="Unchanged"></span> Unchanged 
+        </a></td>
+        <td>Complete</td>
+
+    </tr>
+     
+    <tr>
+        <td>
+           Number of Force Domains with SPF records with the old pnn gateway listed 
+ 
+        </td>
+        <td>
+            <%= Domain.forces.spf.where("spf like?", ["%a:mail%"]).length %>
+        </td>
+        <td><a class="btn btn-success btn-sm btn-block">
+          <span class="glyphicon glyphicon-minus" style="color:green" data-toggle="tooltip" data-original-title="Down 1"></span>    Down 1    
+        </a></td>
+        <td>52 to update (2 on CJX)</td>
+
+    </tr>
+     
+    <tr>
+        <td>
+            Number of Force Domains with DMARC records 
+
+        </td>
+        <td>
+            <%= Domain.forces.dmarc.length %>
+        </td>
+        <td><a class="btn btn-success btn-sm btn-block">
+          <span class="glyphicon glyphicon-plus" style="color:green" data-toggle="tooltip" data-original-title="Up 9"></span>    Up 9   
+        </a></td>
+        <td>45 to update</td>
+
+    </tr>
+     
+    <tr>
+        <td>
+          Number of Force Domains with DMARC record set to reject
+  
+        </td>
+        <td>
+            <%= Domain.forces.dmarc.where("dmarc like?", ["%reject%"]).length %>
+        </td>
+        <td><a class="btn btn-danger btn-sm btn-block"data-toggle="tooltip" data-original-title="Only one domain will prevent spam">
+          <span class="glyphicon glyphicon-record" style="color:red" data-toggle="tooltip" data-original-title="Unchanged"></span> Unchanged 
+        </a></td>
+        <td>74 to update</td>
+
+    </tr>
+</table>

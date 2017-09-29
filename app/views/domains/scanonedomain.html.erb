@@ -3,6 +3,7 @@
 
      <% Resolv::DNS.open do |dns| %>
         <% @domains.each do |domain| %>
+        <%= domain %>
          <% host = domain.domain %>
          <%   records = dns.getresources(host, Resolv::DNS::Resource::IN::TXT) %>
             <% records.each do |record| %>

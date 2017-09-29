@@ -51,8 +51,8 @@ $(document).ready(function(){
               </tbody>
                <%end%>
                <tr>
-                   <td>Total Domains = <%= Domain.forces.count%></td>
-                   <td>Total SPF records = <%= Domain.forces.spf.length %></td>
+                   <td>Total Force Domains = <%= Domain.forces.count%></td>
+                   <td>Total SPF records = <%= Domain.forces.spf.count(:conditions  => ["spf like ?","%a:mail-outbound%"]) %>   </td>
                    <td>Total DMARC records = <%=  Domain.forces.dmarc.length %></td>
                    <td>Total MX records = <%=  Domain.forces.mx.length %></td>
                    <td>Total SIP records = <%=  Domain.forces.sip.length %></td>
